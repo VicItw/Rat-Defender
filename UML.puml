@@ -1,0 +1,308 @@
+@startuml
+class game.GameScreenUtils {
++ {static} int rowAmount
++ {static} int colAmount
++ {static} int gridCellHeight
++ {static} int gridCellWidth
++ {static} int getRowAmount()
++ {static} int getColAmount()
++ {static} int getGridCellHeight()
++ {static} int getGridCellWidth()
+}
+class game.Menu {
+- VBox aboutBox
+- VBox creditBox
++ {static} MediaPlayer backgroundSound
+- {static} Boolean isSoundOn
++ <<Create>> Menu(Stage)
++ void buildUI(Stage)
+- {static} void playBackgroundSound()
+- {static} void toggleSound()
+}
+class game.LoseScreen {
+- Stage stage
++ <<Create>> LoseScreen(Stage)
+- void buildUI(Stage)
++ Stage getStage()
++ void setStage(Stage)
+}
+class game.GameScreen {
+- Stage stage
+- VBox vbox
+- GridPane gridPane
+- Scene scene
+- HBox topBar
+- boolean shooterSelected
+- boolean producerSelected
+- boolean meleeSelected
+- ToggleButton shooterButton
+- ToggleButton producerButton
+- ToggleButton meleeButton
+- Enemies enemies
+- PlacedDefenders placedDefenders
+- Soul soul
+- Label soulLabel
+- ToggleGroup defenderBar
+- StackPane middleBox
++ <<Create>> GameScreen(Stage)
+- void buildUI()
+- void handleCellClick(Pane,int,int)
+- void updateSoulLabel()
++ Stage getStage()
++ void setStage(Stage)
++ VBox getVbox()
++ void setVbox(VBox)
++ GridPane getGridPane()
++ void setGridPane(GridPane)
++ Scene getScene()
++ void setScene(Scene)
++ HBox getTopBar()
++ void setTopBar(HBox)
++ boolean isShooterSelected()
++ void setShooterSelected(boolean)
++ boolean isProducerSelected()
++ void setProducerSelected(boolean)
++ boolean isMeleeSelected()
++ void setMeleeSelected(boolean)
++ ToggleButton getShooterButton()
++ void setShooterButton(ToggleButton)
++ ToggleButton getProducerButton()
++ void setProducerButton(ToggleButton)
++ ToggleButton getMeleeButton()
++ void setMeleeButton(ToggleButton)
++ Enemies getEnemies()
++ void setEnemies(Enemies)
++ PlacedDefenders getPlacedDefenders()
++ void setPlacedDefenders(PlacedDefenders)
++ Soul getSoul()
++ void setSoul(Soul)
++ Label getSoulLabel()
++ void setSoulLabel(Label)
++ ToggleGroup getDefenderBar()
++ void setDefenderBar(ToggleGroup)
++ StackPane getMiddleBox()
++ void setMiddleBox(StackPane)
+}
+abstract class units.defender.Defender {
+- int health
+- int row
+- int column
++ {static} ImageView draw()
++ void attack(Enemies)
++ int getRow()
++ int getColumn()
++ int getHealth()
++ void setHealth(int)
+}
+class units.defender.PlacedDefenders {
+- ArrayList<ArrayList<Defender>> defendersRowList
+- ArrayList<Defender> defendersRow0
+- ArrayList<Defender> defendersRow1
+- ArrayList<Defender> defendersRow2
+- ArrayList<Defender> defendersRow3
+- ArrayList<Defender> defendersRow4
++ <<Create>> PlacedDefenders()
++ void addDefender(Defender,int,int)
++ void removeDeadDefender(Defender,int)
++ ArrayList<ArrayList<Defender>> getDefendersRowList()
++ ArrayList<Defender> getDefendersRow0()
++ ArrayList<Defender> getPlantsRow1()
++ ArrayList<Defender> getPlantsRow2()
++ ArrayList<Defender> getDefendersRow3()
++ ArrayList<Defender> getDefendersRow4()
+}
+class units.defender.Producer {
+- int damage
+- int row
+- int column
+- int health
+- int cost
+- int produceAmount
+- AnimationTimer animationTimer
+- Image spriteSheet
+- ImageView spriteView
+- int TOTAL_FRAMES
+- int FRAME_WIDTH
+- int FRAME_HEIGHT
+- double FRAME_DURATION
+- int currentFrameX
++ <<Create>> Producer(int,int)
++ int getDamage()
++ void setDamage(int)
++ int getRow()
++ void setRow(int)
++ int getColumn()
++ void setColumn(int)
++ int getHealth()
++ void setHealth(int)
++ int getCost()
++ ImageView getSpriteView()
++ void produce(Soul)
+}
+abstract class units.enemy.Enemy {
+- int speed
+- int hp
+~ float xPos
+~ float yPos
+- int row
+- boolean isAttacking
++ int getHp()
++ void setHp(int)
++ {abstract}void move(float)
++ {abstract}float getxPos()
++ {abstract}float getyPos()
++ {abstract}float getSpeed()
++ int getRow()
++ void attack(Defender)
++ void setIsAttacking(Boolean)
++ boolean getIsAttacking()
++ {abstract}ImageView getSpriteView()
++ {abstract}Object getCurrentImage()
++ void setSpeed(int)
++ void setxPos(float)
++ void setyPos(float)
++ void setRow(int)
++ boolean isAttacking()
++ void setAttacking(boolean)
+}
+interface units.logic.Producable {
++ void produce(Soul)
+}
+class game.WinScreen {
+- Stage stage
++ <<Create>> WinScreen(Stage)
+- void buildUI(Stage)
++ Stage getStage()
++ void setStage(Stage)
+}
+class units.defender.MeleeAttacker {
+- int damage
+- int row
+- int column
+- int health
+- int cost
+- Image spriteSheet
+- ImageView spriteView
+- int TOTAL_FRAMES
+- int FRAME_WIDTH
+- int FRAME_HEIGHT
+- double FRAME_DURATION
+- int currentFrameX
+- AnimationTimer animationTimer
++ <<Create>> MeleeAttacker(int,int)
++ void attack(Enemies)
++ int getDamage()
++ void setDamage(int)
++ int getRow()
++ void setRow(int)
++ int getColumn()
++ void setColumn(int)
++ int getHealth()
++ void setHealth(int)
++ int getCost()
++ ImageView getSpriteView()
+}
+interface units.logic.AttackRatable {
++ void attack(Enemies)
+}
+class game.Soul {
+- int amount
++ <<Create>> Soul(int)
++ <<Create>> Soul()
++ void reduceMoney(int)
++ void addMoney(int)
++ int getAmount()
++ void setAmount(int)
+}
+class units.enemy.BasicEnemy {
+- float speed
+- int row
+- int damage
+- boolean isAttacking
+- Image spriteSheet
+- ImageView spriteView
+- AnimationTimer animationTimer
+- int FRAME_DURATION
+- int TOTAL_FRAMES
+- Image currentImage
+- ArrayList<Image> frameList
+- int hp
++ <<Create>> BasicEnemy(float,int)
++ ImageView getSpriteView()
++ void move(float)
++ float getSpeed()
++ float getxPos()
++ float getyPos()
++ int getHp()
++ void setHp(int)
++ int getRow()
++ void attack(Defender)
++ void setIsAttacking(Boolean)
++ boolean getIsAttacking()
++ Image getCurrentImage()
+}
+class Main {
++ {static} void main(String[])
++ void start(Stage)
+}
+class units.defender.Shooter {
+- int damage
+- int row
+- int column
+- int health
+- int cost
+- Image spriteSheet
+- ImageView spriteView
+- int spriteWidth
+- int spriteHeight
+- int numFrames
+- int frameIndex
+- long lastUpdateTime
+- int currentFrame
+- int TOTAL_FRAMES
+- int FRAME_WIDTH
+- int FRAME_HEIGHT
+- double FRAME_DURATION
+- int currentFrameX
+- AnimationTimer animationTimer
++ <<Create>> Shooter(int,int)
++ void attack(Enemies)
++ int getDamage()
++ void setDamage(int)
++ int getRow()
++ void setRow(int)
++ int getColumn()
++ void setColumn(int)
++ int getHealth()
++ void setHealth(int)
++ int getCost()
++ ImageView getSpriteView()
++ {static} ImageView draw()
+}
+class units.enemy.Enemies {
+- ArrayList<ArrayList<Enemy>> enemiesRowList
+- ArrayList<Enemy> enemiesRow1
+- ArrayList<Enemy> enemiesRow2
+- ArrayList<Enemy> enemiesRow3
+- ArrayList<Enemy> enemiesRow4
+- ArrayList<Enemy> enemiesRow0
++ <<Create>> Enemies()
++ void removeDeadEnemies(ArrayList<Enemy>,Enemy)
++ ArrayList<ArrayList<Enemy>> getEnemiesRowList()
++ ArrayList<Enemy> getEnemiesRow1()
++ ArrayList<Enemy> getEnemiesRow2()
++ ArrayList<Enemy> getEnemiesRow3()
++ ArrayList<Enemy> getEnemiesRow4()
++ ArrayList<Enemy> getEnemiesRow0()
+}
+
+
+units.logic.Producable <|.. units.defender.Producer
+units.defender.Defender <|-- units.defender.Producer
+units.logic.AttackRatable <|.. units.defender.MeleeAttacker
+units.defender.Defender <|-- units.defender.MeleeAttacker
+units.enemy.Enemy <|-- units.enemy.BasicEnemy
+javafx.application.Application <|-- Main
+units.logic.AttackRatable <|.. units.defender.Shooter
+units.defender.Defender <|-- units.defender.Shooter
+@enduml
