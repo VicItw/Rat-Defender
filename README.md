@@ -2,12 +2,19 @@ Rat Defender
 A JavaFX-based tower defense game inspired by Plants vs Zombies, where players defend against waves of rats using strategic unit placement.
 🎮 Game Overview
 
-Objective: Prevent rats from reaching the left side of the screen by deploying units via spending souls.
+🚩 Objective  
+
+  Prevent rats from reaching the left side of the screen by deploying units which cost souls.
+  
 🔫 Unit Types
-  Unit	                        Role	                      Cost	               Special Ability
-  Producer	        Generates souls (currency)	           50 souls	          +10 souls every 2.3s
-  Shooter	Ranged              attacker	                   50 souls	      Deals 1 damage (far-ranged)
-  Melee Attacker	      Close-combat fighter	             50 souls	      Deals 2 damage (close-ranged)
+
+    Producer
+      Generates souls (currency) cost: 50 souls ability: +10 souls every 2.3s
+    Shooter	Ranged              
+      attacker cost: 50 souls ability: Deals 1 damage (far-ranged)
+    Melee Attacker	      
+      Close-combat fighter cost: 50 souls	ability: Deals 2 damage (close-ranged)
+    
 🐀 Enemies
 
     Basic Rat: Moves at speed 3, deals 1 damage to units.
@@ -51,17 +58,6 @@ Objective: Prevent rats from reaching the left side of the screen by deploying u
         Lose: A rat breaches your defense.
 
 📂 Project Structure (UML file provided)
-  src/
-  ├── main/
-  │   ├── java/
-  │   │   ├── game/               # Core game logic
-  │   │   │   ├── GameScreen.java # Main gameplay UI
-  │   │   │   ├── Soul.java       # Currency system
-  │   │   ├── units/
-  │   │   │   ├── defender/       # Shooter, Melee, Producer
-  │   │   │   ├── enemy/          # Rat implementations
-  │   │   ├── Menu.java           # Start screen
-  │   ├── resources/              # Sprites, sounds
 
 📜 Credits
 
